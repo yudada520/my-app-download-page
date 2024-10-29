@@ -11,7 +11,7 @@ const resolve = (dir) => path.join(__dirname, dir)
 
 module.exports = defineConfig({
 	productionSourceMap: false,
-
+	publicPath: '/myAppPage',
 	devServer: {
 		// port: 8888,
 	},
