@@ -89,8 +89,6 @@ module.exports = defineConfig({
 					},
 				},
 			})
-
-			// Lazy load layout components
 			config.module
 				.rule('vue')
 				.use('vue-loader')

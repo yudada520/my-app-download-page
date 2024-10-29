@@ -2,7 +2,7 @@
 	<div class="content">
 		<nav class="navBox">
 			<div class="nav-left" @click="jump">
-				<img src="@/assets/GooglePlay.png" alt="Google Play" />
+				<svg-icon iconClass="gooleplay" width="40" height="40" />
 				Google Play
 			</div>
 			<div class="nav-right">
@@ -13,7 +13,7 @@
 
 		<section class="appBrief">
 			<div class="app-logo">
-				<img src="/img/applogo022.png" alt="Starry 777 Slots" />
+				<img :src="appLogoSrc" alt="Starry 777 Slots" />
 			</div>
 			<div class="app-info">
 				<span class="app-name">Starry 777 Slots</span>
@@ -68,6 +68,11 @@ export default {
 			],
 		}
 	},
+	computed: {
+		appLogoSrc() {
+			return process.env.NODE_ENV === 'development' ? '/img/applogo022.png' : '/myAppPage/img/applogo022.png'
+		},
+	},
 	methods: {
 		jump() {
 			window.location.href = 'https://play.google.com/store/games'
@@ -78,7 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-	padding: 10px 16px;
+	padding: 10px 20px;
 	box-sizing: border-box;
 
 	.navBox {
@@ -97,12 +102,6 @@ export default {
 			font-size: 20px;
 			font-weight: 600;
 			color: #5f6368;
-
-			img {
-				margin-right: 8px;
-				width: 40px;
-				height: 40px;
-			}
 		}
 
 		.nav-right {

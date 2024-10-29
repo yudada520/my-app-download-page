@@ -6,12 +6,20 @@
 		</div>
 		<div class="infoBox">{{ gameInfo }}</div>
 
-		<div class="itemInfoBox" v-for="(item, index) in infoList" :key="index" style="margin-top: 30px">
+		<div class="itemInfoBox" v-for="(item, index) in infoList" :key="index">
 			<div class="item-header">{{ item.name }}</div>
 			<div v-for="(ele, index1) in item.list" :key="index1" class="item-list">
 				{{ ele }}
 			</div>
 		</div>
+
+		<div class="downBtn" @click="jump">Santai</div>
+
+		<div class="top">
+			<div class="lf">Keamanan Data</div>
+			<div class="rg"><svg-icon iconClass="rg" width="22" height="22" /></div>
+		</div>
+		<div class="infoBox">{{ baseInfo }}</div>
 	</div>
 </template>
 
@@ -19,31 +27,14 @@
 export default {
 	data() {
 		return {
-			infoList: [
-				{
-					name: 'Slot Populer:',
-					list: this.getPopularSlots(),
-				},
-				{
-					name: 'Slot Populer:',
-					list: this.getPopularSlots(),
-				},
-				{
-					name: 'Slot Populer:',
-					list: this.getPopularSlots(),
-				},
-			],
-			gameInfo:
-				'Starry 777 Slots terdiri dari game papan yang memiliki ciri khas lokal Indonesia, dan ada juga game khas lokal Indonesia seperti: DuoFuDuoCai, FaFaFa, Bandar QQ, Olympus, Sweet Bonanza, yang akan menemani Anda di waktu santai!',
+			infoList: window.infoList,
+			gameInfo: window.gameInfo,
+			baseInfo: window.baseInfo,
 		}
 	},
 	methods: {
-		getPopularSlots() {
-			return [
-				'【FaFaFa】Dapatkan scatter untuk game gratis, simbol kakek merah dan lihat poin mega win siapa yang lebih tinggi!',
-				'【DuoFuDuoCai】Dapatkan wild untuk game jackpot, uji coba keberuntunganmu untuk grand jackpot!',
-				'【HuaKaiFuGui】Dapatkan hadiah berlipat ganda di Lucky wheel pada game gratis!',
-			]
+		jump() {
+			window.location.href = 'https://play.google.com/store/apps/category/GAME_CASINO'
 		},
 	},
 }
@@ -56,29 +47,47 @@ export default {
 	.top {
 		display: flex;
 		justify-content: space-between;
-		margin: 10px 0;
+		margin: 20px 0;
 		font-weight: 600;
+		font-size: 15px;
+		.lf {
+			font-size: 18px;
+		}
 	}
 
 	.infoBox {
+		line-height: 25px;
 		text-align: left;
 		color: #5f6368;
-		font-size: 14px;
-		letter-spacing: 0.5px;
+		font-size: 15px;
 	}
 
 	.item-header {
 		font-weight: bold;
 		text-align: left;
 		margin-bottom: 10px;
+		font-size: 15px;
 	}
 
 	.item-list {
-		line-height: 20px;
+		line-height: 25px;
 		text-align: left;
 		color: #5f6368;
-		font-size: 14px;
-		letter-spacing: 0.5px;
+		font-size: 15px;
+	}
+
+	.itemInfoBox {
+		margin-top: 30px;
+	}
+
+	.downBtn {
+		width: 72px;
+		height: 30px;
+		line-height: 30px;
+		border: 1px solid;
+		border-radius: 16px;
+		margin: 40px 0;
+		border-color: #cccccc;
 	}
 }
 </style>

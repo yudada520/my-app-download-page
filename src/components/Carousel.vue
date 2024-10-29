@@ -12,7 +12,6 @@
 export default {
 	data() {
 		return {
-			images: window.carouselImgs.map((item) => item.img),
 			currentIndex: 0,
 			startX: 0,
 			endX: 0,
@@ -25,8 +24,15 @@ export default {
 				transition: 'transform 0.5s ease',
 			}
 		},
+		images() {
+			const originalPaths = window.carouselImgs.map((item) => item.img)
+			return process.env.NODE_ENV === 'development' ? originalPaths : this.updateImagePath(originalPaths, '../img', '../myAppPage/img')
+		},
 	},
 	methods: {
+		updateImagePath(originalImages, oldPath, newPath) {
+			return originalImages.map((img) => (img.includes(oldPath) ? img.replace(oldPath, newPath) : img))
+		},
 		next() {
 			if (this.currentIndex < this.images.length - 1) {
 				this.currentIndex++
