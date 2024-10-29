@@ -26,7 +26,7 @@ export default {
 		},
 		images() {
 			const originalPaths = window.carouselImgs.map((item) => item.img)
-			return process.env.NODE_ENV === 'development' ? originalPaths : this.updateImagePath(originalPaths, '../img', '../myAppPage/img')
+			return this.updateImagePath(originalPaths, '../img', '../myAppPage/img')
 		},
 	},
 	methods: {

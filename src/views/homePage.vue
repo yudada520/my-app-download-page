@@ -70,7 +70,7 @@ export default {
 	},
 	computed: {
 		appLogoSrc() {
-			return process.env.NODE_ENV === 'development' ? '/img/applogo022.png' : '/myAppPage/img/applogo022.png'
+			return '/myAppPage/img/applogo022.png'
 		},
 	},
 	methods: {
