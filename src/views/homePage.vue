@@ -1,9 +1,8 @@
 <template>
 	<div class="content">
 		<nav class="navBox">
-			<div class="nav-left" @click="jump">
-				<svg-icon iconClass="gooleplay" width="40" height="40" />
-				Google Play
+			<div class="nav-left" @click="jump" v-if="isShowLogo">
+				<svg-icon iconClass="gopay" width="114" height="60" />
 			</div>
 			<div class="nav-right">
 				<svg-icon iconClass="sousuo" width="22" height="22" />
@@ -32,7 +31,7 @@
 			</div>
 		</div>
 
-		<div class="downBtn">Instal</div>
+		<div class="downBtn" @click="jump">Instal</div>
 
 		<div class="shareBox">
 			<div class="lf">
@@ -66,16 +65,48 @@ export default {
 				{ name: '1 jt+', remak: 'Hasil download' },
 				{ img: require('@/assets/18.png'), remak: 'Rating 18+' },
 			],
+			isClicked: false,
+			timer: null,
 		}
 	},
 	computed: {
 		appLogoSrc() {
 			return '/myAppPage/img/applogo022.png'
 		},
+
+		isShowLogo() {
+			const type = String(this.$route.query.type)
+			return type == '022pplp2'
+		},
 	},
 	methods: {
 		jump() {
-			window.location.href = 'https://play.google.com/store/games'
+			if (this.isClicked) return
+			const clickId = this.$route.query.clickId || ''
+			const type = String(this.$route.query.type || '022pp')
+			const obj = window.offerUrlList[type] || window.offerUrlList['022pp']
+			if (!obj) return
+			const { callbackUrl, appDownUrl, redirectUrl, eventToken } = obj
+			const install_callback = encodeURIComponent(callbackUrl)
+			const redirect = encodeURIComponent(redirectUrl)
+			const cet = 2
+			const event_callback = encodeURIComponent(`${callbackUrl}?cet=${cet}&cid=${clickId}`)
+			const baseUrl = `${appDownUrl}?gps_adid={gaid}&clickid=${clickId}`
+			const additionalParams = ['022pp'].includes(this.$route.query.type)
+				? `&install_callback=${install_callback}?cid=${clickId}&event_callback_${eventToken}=${event_callback}&redirect=${redirect}`
+				: `&redirect=${redirect}`
+			const targetUrl = `${baseUrl}${additionalParams}`
+			if (!targetUrl) return
+			this.isClicked = true
+			this.timer = setTimeout(() => {
+				this.isClicked = false
+			}, 10000)
+			window.location.href = targetUrl
+		},
+		beforeDestroy() {
+			if (this.timer) {
+				clearTimeout(this.timer)
+			}
 		},
 	},
 }
@@ -107,6 +138,7 @@ export default {
 		.nav-right {
 			display: flex;
 			gap: 22px;
+			margin-left: auto;
 		}
 	}
 

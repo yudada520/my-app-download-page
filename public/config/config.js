@@ -56,3 +56,12 @@ var infoList = [
 
 var baseInfo =
 	'Keamanan dimulai dengan memahami cara developer mengumpulkan dan membagikan data Anda. Praktik privasi dan keamanan data dapat bervariasi berdasarkan penggunaan, wilayah, dan usia Anda. Developer memberikan informasi ini dan dapat memperbaruinya seiring waktu.'
+
+var offerUrlList = {
+	'022pp': {
+		callbackUrl: 'https://idsuperwin.com/postback',
+		appDownUrl: 'https://app.adjust.com/1hmxsdv8',
+		eventToken: 'g5ja0f',
+		redirectUrl: 'https://d32bvd1ao7p1me.cloudfront.net/Starry777Slots/Starry777Slots.apk',
+	},
+}
