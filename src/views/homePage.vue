@@ -51,65 +51,65 @@
 </template>
 
 <script>
-import GameIntroduction from '@/components/GameIntroduction.vue'
-import Carousel from '@/components/Carousel.vue'
+import GameIntroduction from '@/components/GameIntroduction.vue';
+import Carousel from '@/components/Carousel.vue';
 export default {
 	components: {
 		Carousel,
-		GameIntroduction,
+		GameIntroduction
 	},
 	data() {
 		return {
 			itemLists: [
 				{ name: '4.9', remak: '19,3 rb ulasan' },
 				{ name: '1 jt+', remak: 'Hasil download' },
-				{ img: require('@/assets/18.png'), remak: 'Rating 18+' },
+				{ img: require('@/assets/18.png'), remak: 'Rating 18+' }
 			],
 			isClicked: false,
-			timer: null,
-		}
+			timer: null
+		};
 	},
 	computed: {
 		appLogoSrc() {
-			return '/myAppPage/img/applogo022.png'
+			return '/myAppPage/img/applogo022.png';
 		},
 
 		isShowLogo() {
-			const type = String(this.$route.query.type)
-			return type == '022pplp2'
-		},
+			const type = String(this.$route.query.type);
+			return type == '022pplp2';
+		}
 	},
 	methods: {
 		jump() {
-			if (this.isClicked) return
-			const clickId = this.$route.query.clickId || ''
-			const type = String(this.$route.query.type || '022pp')
-			const obj = window.offerUrlList[type] || window.offerUrlList['022pp']
-			if (!obj) return
-			const { callbackUrl, appDownUrl, redirectUrl, eventToken } = obj
-			const install_callback = encodeURIComponent(callbackUrl)
-			const redirect = encodeURIComponent(redirectUrl)
-			const cet = 2
-			const event_callback = encodeURIComponent(`${callbackUrl}?cet=${cet}&cid=${clickId}`)
-			const baseUrl = `${appDownUrl}?gps_adid={gaid}&clickid=${clickId}`
+			if (this.isClicked) return;
+			const clickId = this.$route.query.clickId || '';
+			const type = String(this.$route.query.type || '022pp');
+			const obj = window.offerUrlList[type] || window.offerUrlList['022pp'];
+			if (!obj) return;
+			const { callbackUrl, appDownUrl, redirectUrl, eventToken } = obj;
+			const install_callback = encodeURIComponent(callbackUrl);
+			const redirect = encodeURIComponent(redirectUrl);
+			const cet = 2;
+			const event_callback = encodeURIComponent(`${callbackUrl}?cet=${cet}&cid=${clickId}`);
+			const baseUrl = `${appDownUrl}?gps_adid={gaid}&clickid=${clickId}`;
 			const additionalParams = ['022pp'].includes(this.$route.query.type)
 				? `&install_callback=${install_callback}?cid=${clickId}&event_callback_${eventToken}=${event_callback}&redirect=${redirect}`
-				: `&redirect=${redirect}`
-			const targetUrl = `${baseUrl}${additionalParams}`
-			if (!targetUrl) return
-			this.isClicked = true
+				: `&redirect=${redirect}`;
+			const targetUrl = `${baseUrl}${additionalParams}`;
+			if (!targetUrl) return;
+			this.isClicked = true;
 			this.timer = setTimeout(() => {
-				this.isClicked = false
-			}, 10000)
-			window.location.href = targetUrl
+				this.isClicked = false;
+			}, 10000);
+			window.location.href = targetUrl;
 		},
 		beforeDestroy() {
 			if (this.timer) {
-				clearTimeout(this.timer)
+				clearTimeout(this.timer);
 			}
-		},
-	},
-}
+		}
+	}
+};
 </script>
 
 <style lang="scss" scoped>

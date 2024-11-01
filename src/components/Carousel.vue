@@ -1,7 +1,14 @@
 <template>
 	<div class="carousel">
 		<div class="carousel-container" :style="carouselStyle">
-			<div class="carousel-item" v-for="(image, index) in images" :key="index" @touchstart="touchStart($event)" @touchmove="touchMove($event)" @touchend="touchEnd">
+			<div
+				class="carousel-item"
+				v-for="(image, index) in images"
+				:key="index"
+				@touchstart="touchStart($event)"
+				@touchmove="touchMove($event)"
+				@touchend="touchEnd"
+			>
 				<img :src="image" alt="Carousel Image" />
 			</div>
 		</div>
@@ -14,51 +21,51 @@ export default {
 		return {
 			currentIndex: 0,
 			startX: 0,
-			endX: 0,
-		}
+			endX: 0
+		};
 	},
 	computed: {
 		carouselStyle() {
 			return {
 				transform: `translateX(-${this.currentIndex * 100}%)`,
-				transition: 'transform 0.5s ease',
-			}
+				transition: 'transform 0.5s ease'
+			};
 		},
 		images() {
-			const originalPaths = window.carouselImgs.map((item) => item.img)
-			return this.updateImagePath(originalPaths, '../img', '../myAppPage/img')
-		},
+			const originalPaths = window.carouselImgs.map((item) => item.img);
+			return this.updateImagePath(originalPaths, '../img', '../myAppPage/img');
+		}
 	},
 	methods: {
 		updateImagePath(originalImages, oldPath, newPath) {
-			return originalImages.map((img) => (img.includes(oldPath) ? img.replace(oldPath, newPath) : img))
+			return originalImages.map((img) => (img.includes(oldPath) ? img.replace(oldPath, newPath) : img));
 		},
 		next() {
 			if (this.currentIndex < this.images.length - 1) {
-				this.currentIndex++
+				this.currentIndex++;
 			}
 		},
 		prev() {
 			if (this.currentIndex > 0) {
-				this.currentIndex--
+				this.currentIndex--;
 			}
 		},
 		touchStart(event) {
-			this.startX = event.touches[0].clientX
+			this.startX = event.touches[0].clientX;
 		},
 		touchMove(event) {
-			this.endX = event.touches[0].clientX
+			this.endX = event.touches[0].clientX;
 		},
 		touchEnd() {
 			if (this.startX > this.endX + 50) {
-				this.next()
+				this.next();
 			} else if (this.startX < this.endX - 50) {
-				this.prev()
+				this.prev();
 			}
-		},
+		}
 	},
-	watch: {},
-}
+	watch: {}
+};
 </script>
 
 <style scoped>

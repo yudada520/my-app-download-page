@@ -29,15 +29,15 @@ export default {
 		return {
 			infoList: window.infoList,
 			gameInfo: window.gameInfo,
-			baseInfo: window.baseInfo,
-		}
+			baseInfo: window.baseInfo
+		};
 	},
 	methods: {
 		jump() {
-			window.location.href = 'https://play.google.com/store/apps/category/GAME_CASINO'
-		},
-	},
-}
+			window.location.href = 'https://play.google.com/store/apps/category/GAME_CASINO';
+		}
+	}
+};
 </script>
 
 <style lang="scss" scoped>
